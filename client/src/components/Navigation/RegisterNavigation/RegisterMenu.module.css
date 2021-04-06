@@ -1,0 +1,20 @@
+.Menu {
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 300px;
+    padding: 88px 10px;
+    box-sizing: border-box;
+    background: rgb(236 169 16);
+    transform: translateX(0px);
+    transition: transform .22s ease-in;
+    z-index: 100;
+  }
+  
+  .Menu.close {
+      transform: translateX(300px);
+  }
+
+ 

@@ -1,0 +1,17 @@
+.Footer {
+    padding: 0 10px;
+    background: #9ca59c;
+    display: flex;
+    align-items: center;
+    height: 80px;
+    flex: 0 0 auto;
+    opacity: 0.7;
+}
+
+.Rules {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    font-family: 'Red Hat Display';
+    cursor: pointer;
+}

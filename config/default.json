@@ -1,0 +1,6 @@
+{
+    "port": 5000,
+    "jwtSECRET": "andrei mern",
+    "mongoURI": "mongodb+srv://Andrei:ramsik13@cluster0.u4uxk.mongodb.net/app"
+}
+
