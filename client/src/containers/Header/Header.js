@@ -1,5 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Header.module.css";
+import { connect } from "react-redux";
+import {
+  toogleMenuHandler,
+  toogleAuthHandler,
+  registerHandler,
+  authHandler,
+} from "../../store/Actions/header";
 import MenuToggle from "../../components/UI/MenuToggle/MenuToggle";
 import AuthToogle from "../../components/UI/AuthToogle/AuthToogle";
 import Menu from "../../components/Navigation/UserNavigation/Menu";
@@ -7,28 +14,58 @@ import RegisterMenu from "../../components/Navigation/RegisterNavigation/Registe
 import Search from "../../components/UI/Search/Search";
 import Logo from "../../components/UI/Logo/Logo";
 
-const Header = () => {
-  const [burgerMenu, setMenu] = useState(false);
-  const [authMenu, setAuthMenu] = useState(false);
-  const toogleMenuHandler = () => {
-    setMenu(!burgerMenu);
-  };
-  const toogleAuthHandler = () => {
-    setAuthMenu(!authMenu);
-  };
-
+const Header = (props) => {
   return (
     <div>
       <div className={classes.Header}>
-        <Menu isOpen={burgerMenu} onClose={toogleMenuHandler} />
-        <MenuToggle onToogle={toogleMenuHandler} isOpen={burgerMenu} />
+        <Menu isOpen={props.burgerMenu} onClose={props.toogleMenuHandler} />
+        <MenuToggle
+          onToogle={props.toogleMenuHandler}
+          isOpen={props.burgerMenu}
+        />
         <Logo />
         <Search />
-        <AuthToogle onToogle={toogleAuthHandler} isOpen={authMenu} />
-        <RegisterMenu isOpen={authMenu} onClose={toogleAuthHandler} />
+        <AuthToogle
+          onToogle={props.toogleAuthHandler}
+          isOpen={props.authMenu}
+        />
+        <RegisterMenu
+          isOpen={props.authMenu}
+          onClose={props.toogleAuthHandler}
+          isAuth={props.isAuth}
+          title={props.title}
+          placeholder={props.placeholder}
+          name={props.name}
+          subtitle={props.subtitle}
+          auth={props.auth}
+          registerHandler={props.registerHandler}
+          authHandler={props.authHandler}
+        />
       </div>
     </div>
   );
 };
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    burgerMenu: state.header.burgerMenu,
+    authMenu: state.header.authMenu,
+    isAuth: state.header.isAuth,
+    title: state.header.title,
+    placeholder: state.header.placeholder,
+    name: state.header.name,
+    subtitle: state.header.subtitle,
+    auth: state.header.auth,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    toogleMenuHandler: () => dispatch(toogleMenuHandler()),
+    toogleAuthHandler: () => dispatch(toogleAuthHandler()),
+    registerHandler: () => dispatch(registerHandler()),
+    authHandler: () => dispatch(authHandler()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

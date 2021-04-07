@@ -1,23 +1,22 @@
 import React from "react";
 import classes from "./Footer.module.css";
-import Icon from "../../components/UI/Icon/Icon";
 
-const links = [
-  { to: "https://vk.com/feed", class: "fa-facebook" },
-  { to: "https://www.instagram.com/?hl=ru", class: "fa-instagram" },
-  { to: "https://twitter.com/?lang=ru", class: "fa-twitter" },
-  { to: "https://www.youtube.com/", class: "fa-youtube" },
-];
+// const links = [
+//   { to: "https://vk.com/feed", class: "fa-facebook" },
+//   { to: "https://www.instagram.com/?hl=ru", class: "fa-instagram" },
+//   { to: "https://twitter.com/?lang=ru", class: "fa-twitter" },
+//   { to: "https://www.youtube.com/", class: "fa-youtube" },
+// ];
 
-function renderLinks() {
-  return links.map((item, index) => {
-    return (
-      <li key={index}>
-        <i className={item.label} aria-hidden="true" />
-      </li>
-    );
-  });
-}
+// function renderLinks() {
+//   return links.map((item, index) => {
+//     return (
+//       <li key={index}>
+//         <i className={item.label} aria-hidden="true" />
+//       </li>
+//     );
+//   });
+// }
 
 const Footer = () => (
   <div className={classes.Footer}>

@@ -91,7 +91,6 @@ const Form = (props) => {
     });
   };
 
-  const registerHandler = props.onClick;
   return (
     <React.Fragment>
       <form className={classes.Form} onSubmit={props.onSubmit}>
@@ -106,7 +105,10 @@ const Form = (props) => {
         </Button>
       </form>
       <p>{props.subtitle}</p>
-      <Button type="primary" onClick={registerHandler}>
+      <Button
+        type="primary"
+        onClick={!props.isAuth ? props.authHandler : props.registerHandler}
+      >
         {props.auth}
       </Button>
     </React.Fragment>
