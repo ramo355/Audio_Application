@@ -8,7 +8,6 @@ const links = [
   { to: "/top", label: "Топ-100", exact: false },
   { to: "/new", label: "Новинки", exact: true },
   { to: "/genres", label: "Жанры", exact: false },
-  { to: "/playlist", label: "Мой плейлист", exact: false },
 ];
 
 export function Menu(props) {
@@ -16,7 +15,7 @@ export function Menu(props) {
     props.onClose();
   };
 
-  const renderLinks = () => {
+  const renderLinks = (links) => {
     return links.map((link, index) => {
       return (
         <li key={index}>
@@ -36,10 +35,12 @@ export function Menu(props) {
   if (!props.isOpen) {
     cls.push(classes.close);
   }
+
+
   return (
     <React.Fragment>
       <nav className={cls.join(" ")}>
-        <ul>{renderLinks()}</ul>
+        <ul>{renderLinks(links)}</ul>
       </nav>
       {props.isOpen ? <Backdrop onClick={props.onClose} /> : null}
     </React.Fragment>

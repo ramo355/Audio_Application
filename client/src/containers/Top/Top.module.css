@@ -1,0 +1,14 @@
+.Top {
+    padding: 10px 0;
+     background: #fff;
+/* display: flex;
+flex-direction: column; */
+margin-top: 50px;
+text-align: center;
+align-items: center;
+}
+
+.Top button {
+    width: 150px;
+    margin-top: 30px;
+}

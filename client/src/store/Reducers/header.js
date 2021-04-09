@@ -2,7 +2,7 @@ import {
   MENU_HANDLER,
   AUTH_HANDLER,
   REGISTRATION_HANDLER,
-  AUTHENTIFICATION_HANDLER,
+  AUTHENTIFICATION_HANDLER
 } from "../Actions/actionTypes";
 
 const initialState = {
@@ -14,7 +14,9 @@ const initialState = {
   name: "",
   subtitle: "",
   auth: "",
+  token: null,
 };
+
 
 export default function headerReducer(state = initialState, action) {
   switch (action.type) {
@@ -47,3 +49,5 @@ export default function headerReducer(state = initialState, action) {
       return state;
   }
 }
+
+// export const menu = state => state.burgerMenu

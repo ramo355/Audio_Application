@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import classes from "./Form.module.css";
 import Button from "../UI/Buton/Button";
 import Input from "../UI/Input/Input";
+import { connect } from "react-redux";
+import { authHandler, registerHandler } from "../../store/Actions/header";
 
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -91,14 +93,22 @@ const Form = (props) => {
     });
   };
 
+  // const loginHandler = () => {
+
+  // };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <React.Fragment>
-      <form className={classes.Form} onSubmit={props.onSubmit}>
+      <form className={classes.Form} onSubmit={submitHandler}>
         <h2>{props.title}</h2>
         {renderInputs()}
         <Button
           type="success"
-          onClick={props.loginHandler}
+          onClick={props.registerHandler}
           disabled={!isFormValid}
         >
           {props.name}
@@ -115,4 +125,22 @@ const Form = (props) => {
   );
 };
 
-export default Form;
+function mapStateToProps(state) {
+  return {
+    isAuth: state.header.isAuth,
+    title: state.header.title,
+    placeholder: state.header.placeholder,
+    name: state.header.name,
+    subtitle: state.header.subtitle,
+    auth: state.header.auth,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    registerHandler: () => dispatch(registerHandler()),
+    authHandler: () => dispatch(authHandler()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

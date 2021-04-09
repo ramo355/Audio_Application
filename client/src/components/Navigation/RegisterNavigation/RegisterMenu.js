@@ -20,17 +20,7 @@ export const RegisterMenu = (props) => {
   return (
     <React.Fragment>
       <div className={cls.join(" ")}>
-        <Form
-          isAuth={props.isAuth}
-          authHandler={props.authHandler}
-          registerHandler = {props.registerHandler}
-          onSubmit={submitHandler}
-          title={props.title}
-          placeholder={props.placeholder}
-          name={props.name}
-          subtitle={props.subtitle}
-          auth={props.auth}
-        />
+        <Form onSubmit={submitHandler} />
       </div>
       {props.isOpen ? <Backdrop onClick={props.onClose} /> : null}
     </React.Fragment>

@@ -1,0 +1,55 @@
+.Slider {
+  /* display: flex;
+  justify-content: center; */
+  text-align: center;
+  padding: 10px;
+}
+
+.Slider button {
+  width: 50px;
+  border: none;
+  outline: none;
+}
+
+.Slider button:first-child::before {
+  content: "\2192";
+}
+
+.Slider button:first-child {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: none;
+  font-size: 50px;
+  color: #191a19;
+  order: 3;
+}
+
+.Slider button:first-child::active {
+  border: none;
+  outline: none;
+}
+
+.Slider button:first-child[name="dfdfdddf"] {
+  color: black;
+}
+
+.Slider div {
+  order: 2;
+}
+
+.Slider button:last-child {
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 50px;
+  color: #191a19;
+
+  order: 1;
+}
+.Slider button:last-child::before {
+  content: "\2190";
+}

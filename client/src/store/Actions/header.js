@@ -2,8 +2,9 @@ import {
   MENU_HANDLER,
   AUTH_HANDLER,
   REGISTRATION_HANDLER,
-  AUTHENTIFICATION_HANDLER,
+  AUTHENTIFICATION_HANDLER
 } from "./actionTypes";
+
 
 export function toogleMenuHandler() {
   return {
@@ -28,3 +29,4 @@ export function authHandler() {
     type: AUTHENTIFICATION_HANDLER,
   };
 }
+

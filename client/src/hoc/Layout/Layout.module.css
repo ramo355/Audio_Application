@@ -5,7 +5,7 @@ flex-direction: column;
 }
 
 .Layout main {
-    margin-top: 75px;
+    margin-top: 100px;
 display: flex;
 flex-direction: column;
 flex-grow: 1; 
