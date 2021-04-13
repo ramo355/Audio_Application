@@ -1,28 +1,54 @@
-import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
-import {Audio} from './pages/Audio';
-import {CreatePage} from './pages/CreatePage';
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+import Home from "./containers/Home/Home";
+import Top from "./containers/Top/Top";
+import New from "./containers/New/New";
+import Genres from "./containers/Genres/Genres";
+import Playlist from "./containers/Playlist/Playlist";
+import RegisterMenu from "./components/Navigation/RegisterNavigation/RegisterMenu";
 
-export const useRoutes = isAuthenticated => {
-if(isAuthenticated) {
+export const useRoutes = (isAuthenticated) => {
+  if (isAuthenticated) {
     return (
-        <Switch>
-<Route path='/audio/:id' exact>
-    <Audio />
-</Route>
-<Route path='/create' exact>
-    <CreatePage />
-</Route>
-<Redirect to="/create" />
-        </Switch>
-    )
-}
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/playlist" exact>
+          <Playlist />
+        </Route>
+        <Route path="/top" exact>
+          <Top />
+        </Route>
+        <Route path="/new" exact>
+          <New />
+        </Route>
+        <Route path="/genres" exact>
+          <Genres />
+        </Route>
+        <Route path="/auth" exact>
+          <RegisterMenu />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
 
-return (
+  return (
     <Switch>
-<Route path='/' exact>
-<Audio />
-</Route>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/top" exact>
+        <Top />
+      </Route>
+      <Route path="/new" exact>
+        <New />
+      </Route>
+      <Route path="/genres" exact>
+        <Genres />
+      </Route>
+      <Redirect to="/" />
     </Switch>
-)
-}
+  );
+};

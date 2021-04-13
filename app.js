@@ -1,12 +1,14 @@
 const express = require("express"); // - подключаем express
 const config = require("config");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const routes = require("./routes/posts")
 
 const app = express(); // - создаем сервер
+app.use(express.json({extended: true}))
 
-
-// app.use('/api/auth', require('./routes/auth'))
-
+app.use('/api/auth', require('./routes/auth'))
+app.use(routes)
 const PORT = config.get("port") || 5000;
 
 async function start() {

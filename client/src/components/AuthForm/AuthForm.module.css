@@ -1,0 +1,8 @@
+.Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.Form h2, p {
+    text-align: center;
+}

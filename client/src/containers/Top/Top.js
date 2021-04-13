@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Top.module.css";
 import Song from "../../components/Song/Song";
 import Button from '../../components/UI/Buton/Button';

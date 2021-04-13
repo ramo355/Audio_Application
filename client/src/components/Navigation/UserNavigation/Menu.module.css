@@ -34,9 +34,28 @@
   position: relative;
   padding: 0 20px 10px 20px;
   transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.Menu ul li a i {
+  /* color: rgb(94, 178, 252); */
 }
 
 .Menu ul li a:hover,
 .active {
   opacity: 0.7;
+}
+
+.Menu ul li:first-child div {
+  margin-left: 12px;
+}
+.Menu ul li:nth-child(2) div {
+  margin-left: 10px;
+}
+.Menu ul li:nth-child(3) div {
+  margin-left: 23px;
+}
+.Menu ul li:nth-child(4) div {
+  margin-left: 16px;
 }

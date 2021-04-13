@@ -25,12 +25,12 @@ export default function headerReducer(state = initialState, action) {
         burgerMenu: !state.burgerMenu,
       };
     case AUTH_HANDLER:
-      return { ...state, authMenu: !state.authMenu };
+      return { ...state, authMenu: !state.authMenu, isAuth: false };
 
     case REGISTRATION_HANDLER:
       return {...state,
         isAuth: !state.isAuth,
-        title: state.title = "Войти",
+        title: state.title = "Авторизация",
         name: state.name = "Вход",
         subtitle: state.subtitle = "У вас еще нет аккаунта?",
         auth: state.auth = "Зарегистрироваться",

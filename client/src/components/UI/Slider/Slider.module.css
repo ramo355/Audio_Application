@@ -1,11 +1,10 @@
 .Slider {
-  /* display: flex;
-  justify-content: center; */
   text-align: center;
   padding: 10px;
 }
 
 .Slider button {
+  z-index: 1;
   width: 50px;
   border: none;
   outline: none;
@@ -23,19 +22,12 @@
   background: none;
   font-size: 50px;
   color: #191a19;
-  order: 3;
+  order: 1;
 }
 
-.Slider button:first-child::active {
-  border: none;
-  outline: none;
-}
-
-.Slider button:first-child[name="dfdfdddf"] {
-  color: black;
-}
 
 .Slider div {
+  z-index: -1;
   order: 2;
 }
 
@@ -48,7 +40,7 @@
   font-size: 50px;
   color: #191a19;
 
-  order: 1;
+  order: 3;
 }
 .Slider button:last-child::before {
   content: "\2190";

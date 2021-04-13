@@ -1,9 +1,0 @@
-.Form {
-    display: flex;
-    flex-direction: column;
-    /* transition: all .35s ease-in; */
-}
-
-.Form h2, p {
-    text-align: center;
-}

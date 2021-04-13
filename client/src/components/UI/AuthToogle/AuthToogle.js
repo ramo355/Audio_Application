@@ -12,7 +12,7 @@ const AuthToogle = (props) => {
       {props.isOpen ? (
         <i className={cls.join(" ")} onClick={props.onToogle} />
       ) : (
-        <div className={classes.AuthToogle} onClick={props.onToogle}>
+        <div to='/auth' className={classes.AuthToogle} onClick={props.onToogle}>
           Войти
         </div>
       )}

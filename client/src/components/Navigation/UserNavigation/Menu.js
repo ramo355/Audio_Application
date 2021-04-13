@@ -2,15 +2,27 @@ import React from "react";
 import classes from "./Menu.module.css";
 import { NavLink } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
+import Icon from "../../UI/Icon/Icon";
 
 const links = [
-  { to: "/", label: "Главная", exact: true },
-  { to: "/top", label: "Топ-100", exact: false },
-  { to: "/new", label: "Новинки", exact: true },
-  { to: "/genres", label: "Жанры", exact: false },
+  { to: "/", label: "Главная", exact: true, class: "fa-home" },
+  { to: "/top", label: "Топ-100", exact: false, class: "fa-star" },
+  { to: "/new", label: "Новинки", exact: true, class: "fa-fire" },
+  { to: "/genres", label: "Жанры", exact: false, class: "fa-th-large" },
 ];
 
 export function Menu(props) {
+  if (props.isAuthenticated) {
+    links.push({
+      to: "/playlist",
+      label: "Мой плейлист",
+      exact: true,
+      class: "fa-music",
+    });
+  };
+  // if(props.isAdmin) {
+
+  // }
   const handleClick = () => {
     props.onClose();
   };
@@ -25,7 +37,8 @@ export function Menu(props) {
             activeClassName={classes.active}
             onClick={handleClick}
           >
-            {link.label}
+            <Icon class={link.class} />{" "}
+            <div className={classes.Label}>{link.label}</div>
           </NavLink>
         </li>
       );
@@ -35,7 +48,6 @@ export function Menu(props) {
   if (!props.isOpen) {
     cls.push(classes.close);
   }
-
 
   return (
     <React.Fragment>
