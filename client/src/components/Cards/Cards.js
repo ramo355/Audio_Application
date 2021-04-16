@@ -1,17 +1,18 @@
 import React from "react";
 import classes from "./Cards.module.css";
+import { NavLink } from "react-router-dom";
 
-
-
-const Cards = () => {
-    return (
-<div className={classes.Cards}>
-    <div className={classes.Card_img}>
-    <img src={process.env.PUBLIC_URL + "/images/images.jpg"} alt=" " />
+const Cards = (props) => {
+  return (
+    <div className={classes.Cards}>
+      <div className={classes.Cards_row}>
+        <NavLink to={props.to}>
+          <img src={props.src} alt={props.src} />
+        </NavLink>
+        <div className={classes.Card_title}>{props.title}</div>
+      </div>
     </div>
-    <div className={classes.Card_title}>Rock</div>
-</div>
-    )
+  );
 };
 
 export default Cards;

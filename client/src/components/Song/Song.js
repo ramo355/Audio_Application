@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Song.module.css";
+import Icon from "../UI/Icon/Icon";
 
 const song = [
   {
@@ -62,7 +63,6 @@ const Song = (props) => {
           <div
             style={{
               display: "flex",
-            //   justifyContent: "space-between",
               alignItems: "center",
               width: "80%",
             }}
@@ -73,8 +73,9 @@ const Song = (props) => {
               <div>{item.singer}</div>
             </div>
           </div>
-          <div>+</div>
-          <div>_</div>
+          <div style={{color: '#921414'}}><Icon  class='fa-heart' /></div>
+          <div style={{color: 'rgb(22 20 148 / 66%)'}}><Icon class='fa-plus' /></div>
+          <div style={{color: '#14922f'}}><Icon class='fa-comments' /></div>
         </div>
       );
     });

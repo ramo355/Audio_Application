@@ -17,6 +17,8 @@ const Input = (props) => {
     <div className={cls.join(" ")}>
       <label htmlFor={htmlFor}>{props.label}</label>
       <input
+      required={props.required}
+      name={props.name}
         placeholder={props.placeholder}
         type={inputType}
         id={htmlFor}

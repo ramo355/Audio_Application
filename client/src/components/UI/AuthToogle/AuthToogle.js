@@ -1,21 +1,13 @@
 import React from "react";
 import classes from "./AuthToogle.module.css";
+import { NavLink } from "react-router-dom";
 
-const AuthToogle = (props) => {
-  const cls = [classes.AuthToogle, "fa"];
-
-  if (props.isOpen) {
-    cls.push("fa-times");
-  }
+const AuthToogle = () => {
   return (
     <>
-      {props.isOpen ? (
-        <i className={cls.join(" ")} onClick={props.onToogle} />
-      ) : (
-        <div to='/auth' className={classes.AuthToogle} onClick={props.onToogle}>
-          Войти
-        </div>
-      )}
+      <div className={classes.AuthToogle}>
+        <NavLink to="/auth">Войти</NavLink>
+      </div>
     </>
   );
 };

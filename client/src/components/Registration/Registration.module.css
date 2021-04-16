@@ -1,0 +1,28 @@
+.Form {
+    background: #fff;
+    height: 500px;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.Auth {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.Auth label {
+    text-align: left;
+}
+
+.Form button {
+    background: rgb(118 195 113);
+    color: #1f1d1d;
+    width: 150px;
+    margin-top: 20px;
+}
+
+.Form a {
+    color: rgb(83 84 130 / 98%);
+}
+

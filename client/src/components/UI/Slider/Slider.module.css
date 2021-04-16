@@ -1,6 +1,7 @@
 .Slider {
   text-align: center;
-  padding: 10px;
+ padding: 15px 15px 15px 65px ;
+ height:600px;
 }
 
 .Slider button {
@@ -25,9 +26,7 @@
   order: 1;
 }
 
-
 .Slider div {
-  z-index: -1;
   order: 2;
 }
 
@@ -39,9 +38,9 @@
   background: none;
   font-size: 50px;
   color: #191a19;
-
   order: 3;
 }
 .Slider button:last-child::before {
   content: "\2190";
 }
+

@@ -1,0 +1,17 @@
+.Top {
+  padding: 10px 0;
+  background: #6d635e;
+  opacity: 0.9;
+  margin-top: 50px;
+  text-align: center;
+  align-items: center;
+}
+
+.Top button {
+  width: 150px;
+  margin-top: 30px;
+}
+
+.Top button a {
+  text-decoration: none;
+}

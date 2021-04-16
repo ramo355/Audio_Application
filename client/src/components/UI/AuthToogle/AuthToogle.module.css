@@ -13,3 +13,8 @@
   /* color: #fff; */
 }
 
+.AuthToogle a {
+  text-decoration: none;
+  color: rgb(28, 31, 31);
+}
+

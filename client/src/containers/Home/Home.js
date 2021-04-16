@@ -1,15 +1,15 @@
 import React from 'react';
 import classes from './Home.module.css';
-import Top from '../Top/Top';
-import Slider from '../../components/UI/Slider/Slider';
+import Top10 from '../../components/Top10/Top10';
+import SimpleSlider from '../../components/UI/Slider/Slider';
 
 
 
 const Home = () => {
     return (
         <div className={classes.Home}>
-<Top />
-<Slider />
+<Top10 />
+<SimpleSlider />
         </div>
     )
 };

@@ -9,19 +9,31 @@ const links = [
   { to: "/top", label: "Топ-100", exact: false, class: "fa-star" },
   { to: "/new", label: "Новинки", exact: true, class: "fa-fire" },
   { to: "/genres", label: "Жанры", exact: false, class: "fa-th-large" },
+  { to: "/playlist", label: "Мой плейлист", exact: true, class: "fa-music" },
+  {
+    to: "/downloads",
+    label: "Загрузить файлы",
+    exact: true,
+    class: "fa-download",
+  },
 ];
 
 export function Menu(props) {
-  if (props.isAuthenticated) {
-    links.push({
-      to: "/playlist",
-      label: "Мой плейлист",
-      exact: true,
-      class: "fa-music",
-    });
-  };
+  // if (props.isAuthenticated) {
+  //   links.push({
+  //     to: "/playlist",
+  //     label: "Мой плейлист",
+  //     exact: true,
+  //     class: "fa-music",
+  //   });
+  // };
   // if(props.isAdmin) {
-
+  //   links.push({
+  //     to: "/downloads",
+  //     label: "Загрузить файлы",
+  //     exact: true,
+  //     class: "fa-download",
+  //   });
   // }
   const handleClick = () => {
     props.onClose();
