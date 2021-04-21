@@ -1,34 +1,44 @@
 .Search {
-    position: fixed;
-    right: 125px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 20%;
-    font-size: 20px;
+  position: fixed;
+  right: 125px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 20%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.Search input {
+  border: none;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  outline: none;
+  font-family: "Red Hat Display", sans-serif;
+  width: 100%;
+}
+
+.Search > div {
+  margin: 0;
+}
+
+.Search i {
+  font-size: 20px;
+  cursor: pointer;
+  color: #63a09b;
+}
+
+.Search input[placeholder] {
+  opacity: 0.5;
+}
+
+.Search button {
+    background: none;
+    width: 50px;
     display: flex;
     align-items: center;
 }
 
-.Search input {
-border: none;
-font-size: 20px;
-color: rgb(0, 0, 0);
-outline: none;
-font-family: 'Red Hat Display', sans-serif;
-width: 90%;
-}
-
-.Search > div {
-    margin: 0;
-}
-
-.Search i {
-font-size: 20px;
-cursor: pointer;
-color: #63a09b;
-padding: 10px;
-}
-
-.Search input[placeholder] {
-    opacity: 0.5;
-}
+.Search button:active {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0) !important;
+  }

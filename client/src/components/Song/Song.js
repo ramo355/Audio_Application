@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Song.module.css";
 import Icon from "../UI/Icon/Icon";
 
@@ -68,14 +68,21 @@ const Song = (props) => {
             }}
           >
             <div className={classes.place}>{item.place}</div>
+
             <div className={classes.Name_Song}>
-              <div >{item.name}</div>
+              <div>{item.name}</div>
               <div>{item.singer}</div>
             </div>
           </div>
-          <div style={{color: '#921414'}}><Icon  class='fa-heart' /></div>
-          <div style={{color: 'rgb(22 20 148 / 66%)'}}><Icon class='fa-plus' /></div>
-          <div style={{color: '#14922f'}}><Icon class='fa-comments' /></div>
+          <div style={{ color: "#921414" }}>
+            <Icon class="fa-heart" />
+          </div>
+          <div style={{ color: "rgb(22 20 148 / 66%)" }}>
+            <Icon class="fa-plus" />
+          </div>
+          <div style={{ color: "#14922f" }}>
+            <Icon class="fa-comments" />
+          </div>
         </div>
       );
     });

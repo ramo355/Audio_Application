@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import classes from "./Registration.module.css";
+import { connect } from "react-redux";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buton/Button";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
+import { toogleAuthentification } from "../../store/Actions/header";
 
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -18,6 +20,7 @@ const Registration = (props) => {
       label: "Email",
       errorMessage: "Введите корректный email",
       valid: false,
+      placeholder: "Email",
       touched: false,
       validation: {
         required: true,
@@ -30,6 +33,7 @@ const Registration = (props) => {
       label: "Пароль",
       errorMessage: "Пароль должен содержать минимум 6 символов",
       valid: false,
+      placeholder: "Password",
       touched: false,
       validation: {
         required: true,
@@ -60,11 +64,10 @@ const Registration = (props) => {
     return isValid;
   };
 
-
   const onChangeHandler = (event, controlName) => {
     const formControls = { ...register };
     const control = { ...formControls[controlName] };
-   
+
     control.value = event.target.value;
     control.touched = true;
     control.valid = validateControl(control.value, control.validation);
@@ -81,7 +84,6 @@ const Registration = (props) => {
     setIsFormValid(isFormValid);
   };
 
-
   const renderInputs = () => {
     return Object.keys(register).map((item, idx) => {
       const field = register[item];
@@ -89,6 +91,7 @@ const Registration = (props) => {
         <div key={field + idx} className={classes.Auth}>
           <Input
             key={item + idx}
+            placeholder={field.placeholder}
             type={field.type}
             value={field.value}
             valid={field.valid}
@@ -102,6 +105,18 @@ const Registration = (props) => {
       );
     });
   };
+  
+  const toLocalStorage = () => {
+    let email = register.email.value;
+    let password = register.password.value;
+    let user = {};
+    user.email = email;
+    user.password = password;
+    localStorage.setItem(email, JSON.stringify(user));
+    props.register();
+    
+  };
+
 
   return (
     <>
@@ -111,12 +126,27 @@ const Registration = (props) => {
         <div>
           У вас уже есть аккаунта? <NavLink to="/auth">Авторизоваться</NavLink>
         </div>
-        <Button disabled={!isFormValid} className={classes.Button} onClick={() => {
-          console.log(register.email.value) //localstorage
-        }}>Регистрация</Button>
+        <Button
+          disabled={!isFormValid}
+          className={classes.Button}
+          onClick={toLocalStorage}
+        >
+          Регистрация
+        </Button>
       </form>
     </>
   );
 };
 
-export default Registration;
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: state.header.isAuthenticated,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    register: () => dispatch(toogleAuthentification()),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

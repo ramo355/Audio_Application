@@ -10,33 +10,79 @@ function validateEmail(email) {
 }
 
 const Auth = (props) => {
-  const [auth, setAuth] = useState({
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [auth, setRegister] = useState({
     email: {
       value: "",
       type: "email",
       label: "Email",
-      name: "email",
-      errorMessage: '"Введите корректный email"',
-      placeholder: "Email",
-      required: true,
+      errorMessage: "Введите корректный email",
+      valid: false,
+      placeholder: 'Email',
+      touched: false,
+      validation: {
+        required: true,
+        email: true,
+      },
     },
     password: {
       value: "",
       type: "password",
       label: "Пароль",
-      errorMessage: "Введите корректный пароль",
-      name: "password",
-      placeholder: "Password",
-      required: true,
+      errorMessage: "Пароль должен содержать минимум 6 символов",
+      valid: false,
+      placeholder: 'Password',
+      touched: false,
+      validation: {
+        required: true,
+        minLength: 6,
+      },
     },
   });
 
-  const [isInvalid, setIsInvalid] = useState(false);
+  const validateControl = (value, validation) => {
+    if (!validation) {
+      return true;
+    }
 
-  const onChangeHandler = (e, item) => {
-    const authControl = {...auth};
-    const control = authControl[item]
+    let isValid = true;
+
+    if (validation.required) {
+      isValid = value.trim() !== "" && isValid;
+    }
+
+    if (validation.email) {
+      isValid = validateEmail(value) && isValid;
+    }
+
+    if (validation.minLength) {
+      isValid = value.length >= validation.minLength && isValid;
+    }
+
+    return isValid;
   };
+
+
+  const onChangeHandler = (event, controlName) => {
+    const formControls = { ...auth };
+    const control = { ...formControls[controlName] };
+   
+    control.value = event.target.value;
+    control.touched = true;
+    control.valid = validateControl(control.value, control.validation);
+
+    formControls[controlName] = control;
+
+    let isFormValid = true;
+
+    Object.keys(formControls).forEach((name) => {
+      isFormValid = formControls[name].valid && isFormValid;
+    });
+
+    setRegister(formControls);
+    setIsFormValid(isFormValid);
+  };
+
 
   const renderInputs = () => {
     return Object.keys(auth).map((item, idx) => {
@@ -44,19 +90,22 @@ const Auth = (props) => {
       return (
         <div key={field + idx} className={classes.Auth}>
           <Input
-            name={field.name}
-            type={field.type}
-            label={field.label}
-            required={field.required}
-            errorMessage={field.errorMessage}
+            key={item + idx}
             placeholder={field.placeholder}
-            isInvalid={isInvalid}
-            onChange={e => onChangeHandler(e, item)}
+            type={field.type}
+            value={field.value}
+            valid={field.valid}
+            touched={field.touched}
+            label={field.label}
+            shouldValidate={!!field.validation}
+            errorMessage={field.errorMessage}
+            onChange={(event) => onChangeHandler(event, item)}
           />
         </div>
       );
     });
   };
+
 
   return (
     <>

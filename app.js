@@ -1,22 +1,54 @@
-const express = require("express"); // - подключаем express
-const config = require("config");
-const bodyParser = require("body-parser");
+// * NPM Module dependencies.
+const express = require("express");
 const mongoose = require("mongoose");
-const routes = require("./routes/posts")
+const cors = require('cors')
+// const multer = require('multer');
+const File = require("./models/File");
 
-const app = express(); // - создаем сервер
+//App Config
+const config = require("config");
+const app = express();
+const PORT = config.get("port");
+
+
+//Middlewares
 app.use(express.json({extended: true}))
+app.use(cors())
+//API Endpoints
 
-app.use('/api/auth', require('./routes/auth'))
-app.use(routes)
-const PORT = config.get("port") || 5000;
+app.get("/", (req, res) => {
+  res.status(200).send("Hello World");
+});
 
+app.post("/download", (req, res) => {
+  const db = req.body;
+
+  File.create(db, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
+
+app.get("/download", (req, res) => {
+  File.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+//Listener
 async function start() {
   try {
     await mongoose.connect(config.get("mongoURI"), {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useCreateIndex: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     app.listen(PORT, () => {
       console.log(`App is started on PORT ${PORT}`);

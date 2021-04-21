@@ -1,7 +1,10 @@
 .Song {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 250px;
+  align-items: center;
+  justify-content: space-around;
 }
 
 /* .Song_row:hover {
@@ -10,16 +13,22 @@
     transform: scale(1.1);
       } */
 
-.Song_row{
-    width: 45%;
-display: flex;
-justify-content:space-between;
-align-items: center;
-border-bottom: 1px solid grey;
+.Song_row {
+  width: 45%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid grey;
 }
 
 .Name_Song {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+
+.error {
+  position: absolute;
+  top: 160px;
+  color: rgb(72, 184, 141);
 }

@@ -1,14 +1,17 @@
 import React from "react";
 import classes from "./Search.module.css";
 import Input from "../Input/Input";
+import Button from "../Buton/Button";
 import Icon from "../Icon/Icon";
 
 const Search = () => (
-  <div className={classes.Search}>
-    {/* <i className="fa fa-search" aria-hidden="true"></i> */}
-    <Icon class={'fa-search'} />
+    <form className={classes.Search} onSubmit={(e) => e.preventDefault()}>
     <Input placeholder="Трек, артист" />
-  </div>
+    <Button>
+      <Icon class='fa-search'></Icon>
+    </Button>
+    </form>
+  
 );
 
 export default Search;

@@ -24,14 +24,15 @@ const Header = (props) => {
       />
       <Logo />
       <Search />
-      <AuthToogle />
+      {!props.isAuthenticated ? <AuthToogle /> : 'Выйти'}
     </div>
   );
 };
 
 function mapStateToProps(state) {
   return {
-    burgerMenu: state.header.burgerMenu
+    burgerMenu: state.header.burgerMenu,
+    isAuthenticated: state.header.isAuthenticated
   };
 }
 

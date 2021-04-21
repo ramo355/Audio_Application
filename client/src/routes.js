@@ -15,6 +15,7 @@ import HipHop from "./containers/HipHop/HipHop";
 import Electro from "./containers/Electro/Electro";
 import Auth from './components/Auth/Auth';
 import Registration from './components/Registration/Registration';
+import Profile from "./containers/Profile/Profile";
 
 export const useRoutes = (isAuthenticated) => {
   if (isAuthenticated) {
@@ -53,7 +54,9 @@ export const useRoutes = (isAuthenticated) => {
         <Route path="/electro">
           <Electro />
         </Route>
-       
+        <Route path="/downloads" exact>
+        <Download />
+      </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -105,6 +108,9 @@ export const useRoutes = (isAuthenticated) => {
         </Route>
       <Route path='/register'>
           <Registration />
+        </Route>
+        <Route path='/profile'>
+          <Profile />
         </Route>
       <Redirect to="/" />
     </Switch>
