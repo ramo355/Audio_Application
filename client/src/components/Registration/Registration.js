@@ -3,20 +3,22 @@ import classes from "./Registration.module.css";
 import { connect } from "react-redux";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buton/Button";
-import { NavLink, Redirect } from "react-router-dom";
-import { toogleAuthentification } from "../../store/Actions/header";
+import { NavLink } from "react-router-dom";
+import { auth } from "../../store/Actions/auth";
 
 function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
   return re.test(String(email).toLowerCase());
 }
 
 const Registration = (props) => {
+  const [error, setError] = useState('')
   const [isFormValid, setIsFormValid] = useState(false);
   const [register, setRegister] = useState({
     email: {
       value: "",
       type: "email",
+      name: "email",
       label: "Email",
       errorMessage: "Введите корректный email",
       valid: false,
@@ -30,6 +32,7 @@ const Registration = (props) => {
     password: {
       value: "",
       type: "password",
+      name: "password",
       label: "Пароль",
       errorMessage: "Пароль должен содержать минимум 6 символов",
       valid: false,
@@ -88,8 +91,10 @@ const Registration = (props) => {
     return Object.keys(register).map((item, idx) => {
       const field = register[item];
       return (
-        <div key={field + idx} className={classes.Auth}>
+        <div key={field + idx} className={classes.Registration}>
           <Input
+            name={field.name}
+            id={field.name}
             key={item + idx}
             placeholder={field.placeholder}
             type={field.type}
@@ -105,23 +110,28 @@ const Registration = (props) => {
       );
     });
   };
-  
-  const toLocalStorage = () => {
-    let email = register.email.value;
-    let password = register.password.value;
-    let user = {};
-    user.email = email;
-    user.password = password;
-    localStorage.setItem(email, JSON.stringify(user));
-    props.register();
-    
-  };
 
+  const registerHandler = async () => {
+    try {
+      await props.register(
+        register.email.value,
+        register.password.value,
+        false
+      );
+    } catch (e) {
+      const error = e.response
+      setError(error.data['message'])
+    }
+  };
 
   return (
     <>
       <form className={classes.Form} onSubmit={(e) => e.preventDefault()}>
         <h1>Регистрация</h1>
+        <div className={classes.error}>
+        {error}
+        </div>
+       
         {renderInputs()}
         <div>
           У вас уже есть аккаунта? <NavLink to="/auth">Авторизоваться</NavLink>
@@ -129,7 +139,7 @@ const Registration = (props) => {
         <Button
           disabled={!isFormValid}
           className={classes.Button}
-          onClick={toLocalStorage}
+          onClick={registerHandler}
         >
           Регистрация
         </Button>
@@ -138,15 +148,10 @@ const Registration = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: state.header.isAuthenticated,
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    register: () => dispatch(toogleAuthentification()),
+    register: (email, password, isLogin) =>
+      dispatch(auth(email, password, isLogin)),
   };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Registration);
+export default connect(null, mapDispatchToProps)(Registration);

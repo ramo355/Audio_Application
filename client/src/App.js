@@ -1,17 +1,24 @@
-import React from "react";
-import { useRoutes } from "./routes";
-import {connect} from 'react-redux';
+import React, { useEffect } from "react";
+import UseRoutes from "./routes";
 import Layout from "./hoc/Layout/Layout";
+import {autoLogin} from './store/Actions/auth';
+import {connect} from 'react-redux';
 
 function App(props) {
-  const routes = useRoutes(props.isAuthenticated);
-  return <Layout>{routes}</Layout>;
+  useEffect(() => {
+    props.autoLogin()
+  })
+  return (
+    <Layout>
+      <UseRoutes />
+    </Layout>
+  );
 }
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: state.header.isAuthenticated
+function mapDispatchToProps(dispatch) {
+  return  {
+    autoLogin: () => dispatch(autoLogin())
   }
 }
 
-export default connect(mapStateToProps, null)(App);
+export default connect(null, mapDispatchToProps)(App);

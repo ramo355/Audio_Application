@@ -1,5 +1,7 @@
-import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { autoLogin } from "./store/Actions/auth";
 import Home from "./containers/Home/Home";
 import Top from "./containers/Top/Top";
 import New from "./containers/New/New";
@@ -13,12 +15,17 @@ import Pop from "./containers/Pop/Pop";
 import Rap from "./containers/Rap/Rap";
 import HipHop from "./containers/HipHop/HipHop";
 import Electro from "./containers/Electro/Electro";
-import Auth from './components/Auth/Auth';
-import Registration from './components/Registration/Registration';
+import Auth from "./components/Auth/Auth";
+import Registration from "./components/Registration/Registration";
 import Profile from "./containers/Profile/Profile";
+import Logout from "./components/Logout/Logout";
 
-export const useRoutes = (isAuthenticated) => {
-  if (isAuthenticated) {
+const useRoutes = (props) => {
+  useEffect(() => {
+    props.autoLogin();
+  });
+
+  if (props.isAuthenticated) {
     return (
       <Switch>
         <Route path="/" exact>
@@ -55,8 +62,17 @@ export const useRoutes = (isAuthenticated) => {
           <Electro />
         </Route>
         <Route path="/downloads" exact>
-        <Download />
-      </Route>
+          <Download />
+        </Route>
+        <Route path="/playlist" exact>
+          <Playlist />
+        </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
+        <Route path="/logout">
+          <Logout />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -75,12 +91,6 @@ export const useRoutes = (isAuthenticated) => {
       </Route>
       <Route path="/genres" exact>
         <Genres />
-      </Route>
-      <Route path="/downloads" exact>
-        <Download />
-      </Route>
-      <Route path="/playlist" exact>
-        <Playlist />
       </Route>
       <Route path="/rock">
         <Rock />
@@ -103,16 +113,29 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/electro">
         <Electro />
       </Route>
-      <Route path='/auth'>
-          <Auth />
-        </Route>
-      <Route path='/register'>
-          <Registration />
-        </Route>
-        <Route path='/profile'>
-          <Profile />
-        </Route>
+      <Route path="/auth">
+        <Auth />
+      </Route>
+      <Route path="/register">
+        <Registration />
+      </Route>
       <Redirect to="/" />
     </Switch>
   );
 };
+
+function mapStateToProps(state) {
+  return {
+    isAuthenticated: !!state.auth.token,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    autoLogin: () => dispatch(autoLogin()),
+  };
+}
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(useRoutes)
+);

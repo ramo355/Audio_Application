@@ -1,8 +1,7 @@
 import {
   MENU_HANDLER,
   AUTH_HANDLER,
-  REGISTRATION_HANDLER,
-  IS_AUTH
+  REGISTRATION_HANDLER
 } from "./actionTypes";
 
 
@@ -23,10 +22,4 @@ export function registerHandler() {
     type: REGISTRATION_HANDLER,
   };
 }
-
-export function toogleAuthentification() {
-  return {
-    type: IS_AUTH
-  }
-};
 

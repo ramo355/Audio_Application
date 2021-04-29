@@ -9,6 +9,7 @@ import AuthToogle from "../../components/UI/AuthToogle/AuthToogle";
 import Menu from "../../components/Navigation/UserNavigation/Menu";
 import Search from "../../components/UI/Search/Search";
 import Logo from "../../components/UI/Logo/Logo";
+import Logout from "../../components/Logout/Logout";
 
 const Header = (props) => {
   return (
@@ -24,7 +25,7 @@ const Header = (props) => {
       />
       <Logo />
       <Search />
-      {!props.isAuthenticated ? <AuthToogle /> : 'Выйти'}
+      {!props.isAuthenticated ? <AuthToogle /> : <Logout />}
     </div>
   );
 };
@@ -32,7 +33,7 @@ const Header = (props) => {
 function mapStateToProps(state) {
   return {
     burgerMenu: state.header.burgerMenu,
-    isAuthenticated: state.header.isAuthenticated
+    isAuthenticated: state.auth.token,
   };
 }
 

@@ -31,8 +31,6 @@ const Download = (props) => {
   return (
     <div className={classes.Download}>
       <form
-      method="post"
-        action="/download"
         className={classes.Upload}
         onSubmit={(e) => e.preventDefault()}
       >

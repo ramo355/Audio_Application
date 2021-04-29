@@ -1,10 +1,8 @@
-import { MENU_HANDLER, AUTH_HANDLER, IS_AUTH } from "../Actions/actionTypes";
+import { MENU_HANDLER, AUTH_HANDLER } from "../Actions/actionTypes";
 
 const initialState = {
   burgerMenu: false,
-  authMenu: false,
-  isAuthenticated: false,
-  token: null,
+  authMenu: false
 };
 
 export default function headerReducer(state = initialState, action) {
@@ -12,9 +10,7 @@ export default function headerReducer(state = initialState, action) {
     case MENU_HANDLER:
       return { ...state, burgerMenu: !state.burgerMenu };
     case AUTH_HANDLER:
-      return { ...state, authMenu: !state.authMenu, isAuth: false };
-    case IS_AUTH:
-      return { ...state, isAuthenticated: !state.isAuthenticated };
+      return { ...state, authMenu: !state.authMenu }; 
     default:
       return state;
   }

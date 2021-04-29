@@ -6,12 +6,12 @@
     margin: 0 auto;
 }
 
-.Auth {
+.Registration {
     margin: 0 auto;
     width: 50%;
 }
 
-.Auth label {
+.Registration label {
     text-align: left;
 }
 
@@ -24,5 +24,9 @@
 
 .Form a {
     color: rgb(83 84 130 / 98%);
+}
+
+.error {
+    color: red;
 }
 

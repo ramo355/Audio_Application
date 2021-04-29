@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Auth.module.css";
+import { connect } from "react-redux";
+import { auth } from "../../store/Actions/auth";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buton/Button";
 import { NavLink } from "react-router-dom";
@@ -10,15 +12,17 @@ function validateEmail(email) {
 }
 
 const Auth = (props) => {
+  const [error, setError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
-  const [auth, setRegister] = useState({
+  const [auth, setAuth] = useState({
     email: {
       value: "",
       type: "email",
+      name: "email",
       label: "Email",
       errorMessage: "Введите корректный email",
       valid: false,
-      placeholder: 'Email',
+      placeholder: "Email",
       touched: false,
       validation: {
         required: true,
@@ -28,10 +32,11 @@ const Auth = (props) => {
     password: {
       value: "",
       type: "password",
+      name: "password",
       label: "Пароль",
       errorMessage: "Пароль должен содержать минимум 6 символов",
       valid: false,
-      placeholder: 'Password',
+      placeholder: "Password",
       touched: false,
       validation: {
         required: true,
@@ -62,11 +67,10 @@ const Auth = (props) => {
     return isValid;
   };
 
-
   const onChangeHandler = (event, controlName) => {
     const formControls = { ...auth };
     const control = { ...formControls[controlName] };
-   
+
     control.value = event.target.value;
     control.touched = true;
     control.valid = validateControl(control.value, control.validation);
@@ -79,10 +83,9 @@ const Auth = (props) => {
       isFormValid = formControls[name].valid && isFormValid;
     });
 
-    setRegister(formControls);
+    setAuth(formControls);
     setIsFormValid(isFormValid);
   };
-
 
   const renderInputs = () => {
     return Object.keys(auth).map((item, idx) => {
@@ -90,6 +93,8 @@ const Auth = (props) => {
       return (
         <div key={field + idx} className={classes.Auth}>
           <Input
+            name={field.name}
+            id={field.name}
             key={item + idx}
             placeholder={field.placeholder}
             type={field.type}
@@ -106,17 +111,30 @@ const Auth = (props) => {
     });
   };
 
+  const loginHandler = async () => {
+    try {
+      await props.auth(auth.email.value, auth.password.value, true);
+    } catch (e) {
+      const error = e.response;
+      setError(error.data['message']);
+    }
+  };
 
   return (
     <>
       <form className={classes.Form} onSubmit={(e) => e.preventDefault()}>
         <h1>Авторизация</h1>
+        <div className={classes.error}>{error}</div>
         {renderInputs()}
         <div>
           У вас еще нет аккаунта?{" "}
           <NavLink to="/register">Зарегистрироваться</NavLink>
         </div>
-        <Button onClick={onChangeHandler} className={classes.Button}>
+        <Button
+          disabled={!isFormValid}
+          onClick={loginHandler}
+          className={classes.Button}
+        >
           Войти
         </Button>
       </form>
@@ -124,4 +142,10 @@ const Auth = (props) => {
   );
 };
 
-export default Auth;
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (email, password, isLogin) =>
+      dispatch(auth(email, password, isLogin)),
+  };
+}
+export default connect(null, mapDispatchToProps)(Auth);
