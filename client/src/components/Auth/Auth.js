@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./Auth.module.css";
 import { connect } from "react-redux";
-import { auth } from "../../store/Actions/auth";
+import { auth, fetchImage } from "../../store/Actions/auth";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Buton/Button";
 import { NavLink } from "react-router-dom";
@@ -118,6 +118,8 @@ const Auth = (props) => {
       const error = e.response;
       setError(error.data['message']);
     }
+    let userId = localStorage.getItem('userId')
+    props.createAvatar(userId, true, null)
   };
 
   return (
@@ -146,6 +148,7 @@ function mapDispatchToProps(dispatch) {
   return {
     auth: (email, password, isLogin) =>
       dispatch(auth(email, password, isLogin)),
+      createAvatar: (userId,req, img) => dispatch(fetchImage(userId,req, img)),
   };
 }
 export default connect(null, mapDispatchToProps)(Auth);

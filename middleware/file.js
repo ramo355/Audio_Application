@@ -2,10 +2,13 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "images");
+    cb(null, "uploads");
   }, //куда склыдваем файлы
   filename(req, file, cb) {
-    cb(null, new Date().toISOString() + "-" + file.originalname);
+    cb(
+      null,
+      new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
+    );
   }, // название файлов
 }); // куда и как сохранять файлы, которые в дальнейшем сохраняем на сервер
 
@@ -19,7 +22,6 @@ const fileFilter = (req, file, cb) => {
   }
 }; // валидация файлов
 
-module.exports = multer({
-  storage,
-  fileFilter,
-});
+module.exports = multer ({
+    storage, fileFilter
+})

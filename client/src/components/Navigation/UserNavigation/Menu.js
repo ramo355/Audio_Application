@@ -4,7 +4,9 @@ import { NavLink } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
 import Icon from "../../UI/Icon/Icon";
 
+
 export function Menu(props) {
+  const noname = "/images/noname.jpg";
   const links = [
     { to: "/", label: "Главная", exact: true, class: "fa-home" },
     { to: "/top", label: "Топ-100", exact: false, class: "fa-star" },
@@ -61,7 +63,6 @@ export function Menu(props) {
   if (!props.isOpen) {
     cls.push(classes.close);
   }
-
   return (
     <React.Fragment>
       <nav className={cls.join(" ")}>
@@ -69,11 +70,23 @@ export function Menu(props) {
           <>
             {" "}
             <div className={classes.Profile}>
-              <NavLink to="profile" onClick={handleClick}>
-                <img src="https://www.meme-arsenal.com/memes/8b6f5f94a53dbc3c8240347693830120.jpg" />
+              <NavLink to="/profile" onClick={handleClick}>
+                {!props.avatar ? (
+                  <img
+                    src={process.env.PUBLIC_URL + `${noname}`}
+                    alt="noname"
+                  />
+                ) : (
+                  // eslint-disable-next-line no-useless-concat
+                  <img
+                    // eslint-disable-next-line no-useless-concat
+                    src={"http://localhost:5000/" + `${props.avatar}`}
+                    alt={props.avatar}
+                  />
+                )}
               </NavLink>
             </div>
-            <NavLink to="profile" onClick={handleClick}>
+            <NavLink to="/profile" onClick={handleClick}>
               <div className={classes.Change_Profile}>Изменить профиль</div>
             </NavLink>
           </>

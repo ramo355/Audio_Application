@@ -1,64 +1,60 @@
 import React, { useState } from "react";
 import classes from "./Profile.module.css";
 import { connect } from "react-redux";
+import { fetchImage } from "../../store/Actions/auth";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Buton/Button";
-import axios from "axios";
 
 const Profile = (props) => {
-  const [valid, setValid] = useState(false)
+  let userId = localStorage.getItem("userId");
+  const noname = "/images/noname.jpg";
+  const [img, setImg] = useState();
+  // eslint-disable-next-line no-unused-vars
   const [file, setFile] = useState({
     img: {
-      value: null,
       type: "file",
       name: "file",
-      label: "Загрузить картинку",
-    },
-    name: {
-      value: "",
-      type: "text",
-      name: "name",
-      label: "Ваше имя",
+      label: "Загрузить фото",
     },
   });
 
-console.log(file)
-
-  const onChangeHandler = (event, controlName) => {
-    const formControls = { ...file };
-    const control = { ...formControls[controlName] };
-    control.value = event.target.value;
-    formControls[controlName] = control;
-    setFile(formControls);
-    setValid(!valid)
+  const onChangeHandler = (event) => {
+      setImg(event.target.files[0]);
   };
 
-  const fileHandler = async () => {
-const data = {
-  img: file.img.value,
-  name: file.name.value,
-  userId: localStorage.getItem('userId')
-}
-const response = await axios.post('http://localhost:5000/profile', data)
+  const fileHandler = () => {
+    props.createAvatar(userId, false, img);
   };
-
+console.log(props.isAuthenticated)
   const renderInputs = () => {
     return Object.keys(file).map((item, idx) => {
       const field = file[item];
       return (
         <Input
+          ref={field.ref}
           type={field.type}
           name={field.name}
           label={field.label}
           key={field + idx}
-          onChange={(event) => onChangeHandler(event, item)}
+          onChange={onChangeHandler}
         />
       );
     });
   };
 
   return (
-    <div className={classes.Download}>
+    <div className={classes.Profile}>
+      <div>
+        {!props.avatar ? (
+          <img src={process.env.PUBLIC_URL + `${noname}`} alt="noname" />
+        ) : (
+          // eslint-disable-next-line no-useless-concat
+          <img
+            src={`http://localhost:5000/` + `${props.avatar}`}
+            alt={props.avatar}
+          />
+        )}
+      </div>
       <form
         className={classes.Upload}
         encType="multipart/form-data"
@@ -67,7 +63,7 @@ const response = await axios.post('http://localhost:5000/profile', data)
         <h1>Профиль</h1>
         <p>Ваш email: {props.email} </p>
         {renderInputs()}
-        <Button disabled={valid} onClick={fileHandler}>Изменить</Button>
+        <Button onClick={fileHandler}>Изменить</Button>
       </form>
     </div>
   );
@@ -76,7 +72,15 @@ const response = await axios.post('http://localhost:5000/profile', data)
 function mapStateToProps(state) {
   return {
     email: state.auth.email,
+    avatar: state.auth.avatar,
+    isAuthenticated: !!state.auth.token,
   };
 }
 
-export default connect(mapStateToProps, null)(Profile);
+function mapDispatchToPtops(dispatch) {
+  return {
+    createAvatar: (userId, req, img) => dispatch(fetchImage(userId, req, img)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToPtops)(Profile);

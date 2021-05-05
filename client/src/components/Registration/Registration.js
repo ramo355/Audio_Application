@@ -152,6 +152,7 @@ function mapDispatchToProps(dispatch) {
   return {
     register: (email, password, isLogin) =>
       dispatch(auth(email, password, isLogin)),
+     
   };
 }
 export default connect(null, mapDispatchToProps)(Registration);

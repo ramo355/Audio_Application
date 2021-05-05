@@ -21,16 +21,13 @@ import Profile from "./containers/Profile/Profile";
 import Logout from "./components/Logout/Logout";
 
 const useRoutes = (props) => {
-  useEffect(() => {
-    props.autoLogin();
-  });
+  // useEffect(() => {
+  //   props.autoLogin();
+  // });
 
   if (props.isAuthenticated) {
     return (
       <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
         <Route path="/top" exact>
           <Top />
         </Route>
@@ -73,11 +70,14 @@ const useRoutes = (props) => {
         <Route path="/logout">
           <Logout />
         </Route>
+        <Route path="/" exact>
+          <Home />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
   }
-
+console.log(props.isAuthenticated)
   return (
     <Switch>
       <Route path="/" exact>
@@ -124,11 +124,7 @@ const useRoutes = (props) => {
   );
 };
 
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: !!state.auth.token,
-  };
-}
+
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -136,6 +132,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(useRoutes)
-);
+export default 
+  connect(null, mapDispatchToProps)(useRoutes)

@@ -66,9 +66,9 @@
 }
 
 .Profile img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 180px;
+  height: 210px;
+  border-radius: 45%;
   background-color: gray;
   cursor: pointer;
 }

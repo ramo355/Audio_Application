@@ -1,22 +1,28 @@
-.Download {
+.Profile {
   padding: 25px;
   background: #fff;
   height: 100%;
   margin: 10px 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
-
 .Upload {
+  text-align: center;
   padding: 10px;
   border: 1px solid grey;
   width: 500px;
-  display: flex;
-  align-items: start;
-  flex-direction: column;
+height: 300px;
+ 
+ 
   border-radius: 10px;
+}
+
+
+.Profile img {
+  width: 220px;
+  height: 310px;
 }
 
 .Upload button {
@@ -24,13 +30,12 @@
   background: rgb(68, 68, 66);
   margin: 0 auto;
 }
-  
+
 .Upload input {
-  width: 400px;
-  
- 
+  width: 250px;
+  margin: 0 auto;
 }
 
-.Upload input[type='file'] {
+.Upload input[type="file"] {
   border: none;
 }

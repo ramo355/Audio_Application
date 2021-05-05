@@ -42,7 +42,7 @@ router.post(
         const token = jwt.sign({ userId: user.id }, config.get("jwtSECRET"), {
           expiresIn: 60,
         });
-        res.status(200).json({ token, userId: user.id, expiresIn: "3600", email });
+        res.status(200).json({ token, userId: user.id, expiresIn: "3600", email});
       }
     } catch (e) {
       res.status(500).json({ message: "Что-то пошло не так" });

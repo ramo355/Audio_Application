@@ -2,8 +2,11 @@ import React from "react";
 import classes from "./Header.module.css";
 import { connect } from "react-redux";
 import {
-  toogleMenuHandler
+  toogleMenuHandler,
 } from "../../store/Actions/header";
+import {
+  fetchImage
+} from "../../store/Actions/auth";
 import MenuToggle from "../../components/UI/MenuToggle/MenuToggle";
 import AuthToogle from "../../components/UI/AuthToogle/AuthToogle";
 import Menu from "../../components/Navigation/UserNavigation/Menu";
@@ -18,6 +21,7 @@ const Header = (props) => {
         isAuthenticated={props.isAuthenticated}
         isOpen={props.burgerMenu}
         onClose={props.toogleMenuHandler}
+        avatar={props.avatar}
       />
       <MenuToggle
         onToogle={props.toogleMenuHandler}
@@ -34,6 +38,7 @@ function mapStateToProps(state) {
   return {
     burgerMenu: state.header.burgerMenu,
     isAuthenticated: state.auth.token,
+    avatar: state.auth.avatar
   };
 }
 

@@ -1,8 +1,9 @@
-import { AUTH_SUCCESS, AUTH_LOGOUT } from "../Actions/actionTypes";
+import { AUTH_SUCCESS, AUTH_LOGOUT, AVATAR } from "../Actions/actionTypes";
 
 const initialState = {
-  token: null,
-  email: null
+  token: localStorage.getItem('token'),
+  email: null,
+  avatar: null
 };
 
 export default function authReducer(state = initialState, action) {
@@ -10,7 +11,9 @@ export default function authReducer(state = initialState, action) {
     case AUTH_SUCCESS:
       return { ...state, token: action.token, email: action.email };
     case AUTH_LOGOUT:
-      return { ...state, token: null, email: null };
+      return { ...state, token: null, email: null, avatar: null };
+      case AVATAR: 
+      return {...state, avatar: action.image}
     default:
       return state;
   }

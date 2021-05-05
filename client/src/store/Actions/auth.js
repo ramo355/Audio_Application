@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AUTH_SUCCESS, AUTH_LOGOUT } from "./actionTypes";
+import { AUTH_SUCCESS, AUTH_LOGOUT, AVATAR } from "./actionTypes";
 
 export function auth(email, password, isLogin) {
   return async (dispatch) => {
@@ -15,7 +15,7 @@ export function auth(email, password, isLogin) {
     }
     const response = await axios.post(url, authData);
     const data = response.data;
-    console.log(data)
+    console.log(data);
 
     const expirationDate = new Date(
       new Date().getTime() + data.expiresIn * 1000
@@ -73,6 +73,29 @@ export function autoLogin() {
           autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000)
         );
       }
+    }
+  };
+}
+
+export function avatarHandler(image) {
+  return {
+    type: AVATAR,
+    image,
+  };
+}
+
+export function fetchImage(userId, isGet, img) {
+  return async (dispatch) => {
+    const formData = new FormData();
+    formData.append("avatar", img);
+    let data = formData;
+    let url = `http://localhost:5000/profile/${userId}`;
+    if (isGet) {
+      const responce = await axios.get(url);
+      dispatch(avatarHandler(responce.data));
+    } else {
+      const responce = await axios.post(url, data);
+      dispatch(avatarHandler(responce.data));
     }
   };
 }
