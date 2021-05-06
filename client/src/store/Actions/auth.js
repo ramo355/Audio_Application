@@ -88,6 +88,7 @@ export function fetchImage(userId, isGet, img) {
   return async (dispatch) => {
     const formData = new FormData();
     formData.append("avatar", img);
+    formData.append("profile", 'profile');
     let data = formData;
     let url = `http://localhost:5000/profile/${userId}`;
     if (isGet) {

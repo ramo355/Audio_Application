@@ -3,11 +3,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors"); // to allow different domains
 const fileMiddleware = require("./middleware/file");
+// const audioMiddleware = require("./middleware/audio");
 
 // Models
 const register = require("./routes/register");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
+const audio = require("./routes/audio");
 
 // App Config
 const config = require("config");
@@ -16,14 +18,18 @@ const PORT = config.get("port");
 
 // Middlewares
 app.use(cors());
-app.use(fileMiddleware.single("avatar"));
-app.use("/uploads", express.static("uploads"));// use uploads folder to save image
+app.use(fileMiddleware.any());
+// app.use(audioMiddleware.single("track"));
+app.use("/uploads", express.static("uploads")); // use uploads folder to save image
+app.use("/tracks", express.static("track")); // use uploads folder to save music
+app.use("/images", express.static("images")); // use uploads folder to save images for music
 app.use(express.json({ extended: true }));
 
 // Registration routes
 app.post("/register", register);
 app.post("/auth", auth);
 app.post("/profile/:id", profile);
+app.post("/track", audio);
 app.get("/profile/:id", profile);
 
 // Listener

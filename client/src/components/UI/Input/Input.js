@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import classes from "./Input.module.css";
 
 function isInvalid({ valid, touched, shouldValidate }) {
@@ -17,8 +17,8 @@ const Input = (props) => {
     <div className={cls.join(" ")}>
       <label htmlFor={htmlFor}>{props.label}</label>
       <input
-      required={props.required}
-      name={props.name}
+        required={props.required}
+        name={props.name}
         placeholder={props.placeholder}
         type={inputType}
         id={htmlFor}

@@ -23,7 +23,7 @@ export function Menu(props) {
         class: "fa-music",
       },
       {
-        to: "/downloads",
+        to: "/upload",
         label: "Загрузить файлы",
         exact: true,
         class: "fa-download",

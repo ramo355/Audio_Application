@@ -4,8 +4,9 @@ const User = require("../models/User");
 
 
 router.post("/profile/:id", async (req, res) => {
-  // res.status(200);
-  console.log(req.file);
+  res.status(200);
+  // console.log(req.files);
+  
   try {
     const user = await User.findById(req.params.id);
     console.log(user);
@@ -13,8 +14,11 @@ router.post("/profile/:id", async (req, res) => {
       name: req.body.name,
     };
 
-    if (req.file) {
-      toChange.avatarUrl = req.file.path;
+    if (req.files) {
+      req.files.map(item => {
+        toChange.avatarUrl = item.path;
+      })
+      
     }
 
     Object.assign(user, toChange);

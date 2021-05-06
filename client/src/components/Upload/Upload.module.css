@@ -1,0 +1,33 @@
+.Download {
+  padding: 25px;
+  background: #fff;
+  height: 100%;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Upload {
+  padding: 10px;
+  border: 1px solid grey;
+  width: 500px;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.Upload button {
+  width: 200px;
+  background: rgb(68, 68, 66);
+  margin: 0 auto;
+}
+
+.Upload input {
+  width: 400px;
+}
+
+.Upload input[type="file"] {
+  border: none;
+}

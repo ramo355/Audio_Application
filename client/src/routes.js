@@ -7,7 +7,7 @@ import Top from "./containers/Top/Top";
 import New from "./containers/New/New";
 import Genres from "./containers/Genres/Genres";
 import Playlist from "./containers/Playlist/Playlist";
-import Download from "./components/Download/Download";
+import Upload from "./components/Upload/Upload";
 import Rock from "./containers/Rock/Rock";
 import Jazz from "./containers/Jazz/Jazz";
 import Trance from "./containers/Trance/Trance";
@@ -58,8 +58,8 @@ const useRoutes = (props) => {
         <Route path="/electro">
           <Electro />
         </Route>
-        <Route path="/downloads" exact>
-          <Download />
+        <Route path="/upload" exact>
+          <Upload />
         </Route>
         <Route path="/playlist" exact>
           <Playlist />
