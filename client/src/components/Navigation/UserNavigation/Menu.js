@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import Backdrop from "../Backdrop/Backdrop";
 import Icon from "../../UI/Icon/Icon";
 
-
 export function Menu(props) {
   const noname = "/images/noname.jpg";
   const links = [
@@ -15,29 +14,21 @@ export function Menu(props) {
   ];
 
   if (props.isAuthenticated) {
-    links.push(
-      {
-        to: "/playlist",
-        label: "Мой плейлист",
-        exact: true,
-        class: "fa-music",
-      },
-      {
-        to: "/upload",
-        label: "Загрузить файлы",
-        exact: true,
-        class: "fa-download",
-      }
-    );
+    links.push({
+      to: "/playlist",
+      label: "Мой плейлист",
+      exact: true,
+      class: "fa-music",
+    });
   }
-  // if(props.isAdmin) {
-  //   links.push({
-  //     to: "/downloads",
-  //     label: "Загрузить файлы",
-  //     exact: true,
-  //     class: "fa-download",
-  //   });
-  // }
+  if (props.isAdmin) {
+    links.push({
+      to: "/upload",
+      label: "Загрузить файлы",
+      exact: true,
+      class: "fa-download",
+    });
+  }
   const handleClick = () => {
     props.onClose();
   };

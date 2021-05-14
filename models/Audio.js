@@ -6,6 +6,10 @@ const audio = new Schema({
   description: String,
   audioImage: String,
   genre: String,
-});
+  like: Number,
+  comments: []
+},
+{ collection: "audios" }
+);
 
 module.exports = model("Audio", audio);

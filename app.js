@@ -10,6 +10,7 @@ const register = require("./routes/register");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
 const audio = require("./routes/audio");
+const track = require("./routes/track");
 
 // App Config
 const config = require("config");
@@ -21,7 +22,7 @@ app.use(cors());
 app.use(fileMiddleware.any());
 // app.use(audioMiddleware.single("track"));
 app.use("/uploads", express.static("uploads")); // use uploads folder to save image
-app.use("/tracks", express.static("track")); // use uploads folder to save music
+app.use("/track", express.static("track")); // use uploads folder to save music
 app.use("/images", express.static("images")); // use uploads folder to save images for music
 app.use(express.json({ extended: true }));
 
@@ -31,6 +32,7 @@ app.post("/auth", auth);
 app.post("/profile/:id", profile);
 app.post("/track", audio);
 app.get("/profile/:id", profile);
+app.get("/track", track);
 
 // Listener
 async function start() {

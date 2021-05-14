@@ -8,10 +8,7 @@ import { withRouter } from "react-router-dom";
 function App(props) {
   let userId = localStorage.getItem("userId");
   useEffect(() => {
-   
-    console.log(localStorage.getItem("token"));
     props.autoLogin();
-    console.log(props.isAuthenticated);
     props.createAvatar(userId, true, null);
   }, []);
   return (

@@ -6,7 +6,7 @@ const cls = [classes.Icon,'fa']
 cls.push(props.class)
   return (
   
-<i className={cls.join(' ')} aria-hidden="true"></i>
+<i id={props.id} onMouseOver={props.onMouseOver} onClick={props.onClick} className={cls.join(' ')} aria-hidden="true"></i>
 
 
   )};

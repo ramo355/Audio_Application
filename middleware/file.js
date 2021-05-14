@@ -11,23 +11,25 @@ const allowedTypes = [
   "audio/x-mpeg-3",
 ];
 
+
 const storage = multer.diskStorage({
   destination(req, file, cb) {
+    console.log(file.fieldname)
     if (file.mimetype === "audio/mpeg") {
       cb(null, "track");
     }
-    if (req.body.profile === 'profile' && 
-      file.mimetype === "image/png" ||
+    if (file.fieldname === 'avatar' && 
+      (file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
-      file.mimetype === "image/jpeg"
+      file.mimetype === "image/jpeg")
     ) {
       cb(null, "uploads");
     }
       
-    if (!req.body.profile &&
-      file.mimetype === "image/png" ||
+    if (file.fieldname === 'picture' &&
+      (file.mimetype === "image/png" ||
       file.mimetype === "image/jpg" ||
-        file.mimetype === "image/jpeg"
+        file.mimetype === "image/jpeg")
     ) {
       cb(null, "images");
     }

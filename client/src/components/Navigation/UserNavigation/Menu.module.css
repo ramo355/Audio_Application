@@ -59,6 +59,12 @@
 .Menu ul li:nth-child(4) div {
   margin-left: 16px;
 }
+.Menu ul li:nth-child(5) div {
+  margin-left: 16px;
+}
+.Menu ul li:nth-child(6) div {
+  margin-left: 16px;
+}
 
 .Profile {
   display: flex;

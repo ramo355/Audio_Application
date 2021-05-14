@@ -4,14 +4,13 @@ import classes from "./Slider.module.css";
 import Button from "../Buton/Button";
 import Cards from "../../Cards/Cards";
 
-
 const cards = [
   {
-    to:"/rock", src: process.env.PUBLIC_URL + "/images/rock-696x392.jpg", title:"Rock"
+    to: "/rock",
+    src: process.env.PUBLIC_URL + "/images/rock-696x392.jpg",
+    title: "Rock",
   },
-  {to:"/pop",
-  src: process.env.PUBLIC_URL + "/images/pop.jpg",
-  title:"Pop"},
+  { to: "/pop", src: process.env.PUBLIC_URL + "/images/pop.jpg", title: "Pop" },
   {
     to: "/rap",
     src: process.env.PUBLIC_URL + "/images/RAP-696x387.jpg",
@@ -39,7 +38,6 @@ const cards = [
   },
 ];
 
-
 export default function SimpleSlider() {
   var settings = {
     // arrows: true,
@@ -56,17 +54,15 @@ export default function SimpleSlider() {
   const renderCards = () => {
     return cards.map((item, idx) => {
       return (
-        <div>
-          <Cards  to={item.to} src={item.src} title={item.title} />
+        <div key={idx}>
+          <Cards to={item.to} src={item.src} title={item.title} />
         </div>
-      )
-    })
-  }
+      );
+    });
+  };
   return (
     <>
-      <Slider {...settings}>
-      {renderCards()}
-      </Slider>
+      <Slider {...settings}>{renderCards()}</Slider>
     </>
   );
 }

@@ -24,6 +24,11 @@ router.post(
       }
       const { email, password } = req.body;
       const user = await User.findOne({ email });
+      const admin = "k@gmail.com";
+      let isAdmin = false
+      if(email === admin) {
+        isAdmin = true
+      }
 
       if (!user) {
         return res.status(400).json({ message: "Пользователь не найден" });
@@ -36,10 +41,10 @@ router.post(
       }
 
       const token = jwt.sign({ userId: user.id }, config.get("jwtSECRET"), {
-        expiresIn: 60,
+        expiresIn: 60, 
       });
 
-      res.status(200).json({ token, userId: user.id, expiresIn: "3600", email });
+      res.status(200).json({ token, userId: user.id, expiresIn: "3600", email, isAdmin });
     } catch (e) {
       res.status(500).json({ message: "Что-то пошло не так" });
       console.log(e);

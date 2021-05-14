@@ -7,7 +7,7 @@ const user = new Schema({
   name: String,
   playlist: [
     {
-      audioId: Schema.Types.ObjectId,
+      // audioId: Schema.Types.ObjectId,
       // ref: 'Audio',
     },
   ],

@@ -25,8 +25,9 @@ export function auth(email, password, isLogin) {
     localStorage.setItem("userId", data.userId);
     localStorage.setItem("expirationDate", expirationDate);
     localStorage.setItem("email", data.email);
+    localStorage.setItem("isAdmin", data.isAdmin);
 
-    dispatch(authSuccess(data.token, data.email));
+    dispatch(authSuccess(data.token, data.email, data.isAdmin));
     dispatch(autoLogout(data.expiresIn));
   };
 }
@@ -49,11 +50,12 @@ export function logout() {
   };
 }
 
-export function authSuccess(token, email) {
+export function authSuccess(token, email, isAdmin) {
   return {
     type: AUTH_SUCCESS,
     token,
     email,
+    isAdmin,
   };
 }
 
@@ -61,6 +63,7 @@ export function autoLogin() {
   return (dispatch) => {
     const token = localStorage.getItem("token");
     const email = localStorage.getItem("email");
+    const isAdmin = localStorage.getItem("isAdmin");
     if (!token) {
       dispatch(logout());
     } else {
@@ -68,7 +71,7 @@ export function autoLogin() {
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
-        dispatch(authSuccess(token, email));
+        dispatch(authSuccess(token, email, isAdmin));
         dispatch(
           autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000)
         );
@@ -88,7 +91,6 @@ export function fetchImage(userId, isGet, img) {
   return async (dispatch) => {
     const formData = new FormData();
     formData.append("avatar", img);
-    formData.append("profile", 'profile');
     let data = formData;
     let url = `http://localhost:5000/profile/${userId}`;
     if (isGet) {

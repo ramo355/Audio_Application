@@ -4,7 +4,7 @@ const { check, validationResult } = require("express-validator"); // Валид�
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-
+const e = require("express");
 const router = Router();
 
 router.post(
@@ -22,9 +22,13 @@ router.post(
           message: "Неккоректные данные при регистрации",
         });
       }
-
+      const admin = "k@gmail.com";
+      let isAdmin = false;
       const { email, password } = req.body;
       const candidate = await User.findOne({ email });
+      if (email === admin) {
+        isAdmin = true;
+      }
 
       if (candidate) {
         return res
@@ -37,12 +41,14 @@ router.post(
           password: hashedPassword,
         });
         await user.save();
-        console.log(user)
+        console.log(user);
 
         const token = jwt.sign({ userId: user.id }, config.get("jwtSECRET"), {
           expiresIn: 60,
         });
-        res.status(200).json({ token, userId: user.id, expiresIn: "3600", email});
+        res
+          .status(200)
+          .json({ token, userId: user.id, expiresIn: "3600", email, isAdmin });
       }
     } catch (e) {
       res.status(500).json({ message: "Что-то пошло не так" });

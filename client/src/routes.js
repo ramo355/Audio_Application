@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { autoLogin } from "./store/Actions/auth";
 import Home from "./containers/Home/Home";
@@ -21,10 +21,6 @@ import Profile from "./containers/Profile/Profile";
 import Logout from "./components/Logout/Logout";
 
 const useRoutes = (props) => {
-  // useEffect(() => {
-  //   props.autoLogin();
-  // });
-
   if (props.isAuthenticated) {
     return (
       <Switch>
@@ -77,7 +73,6 @@ const useRoutes = (props) => {
       </Switch>
     );
   }
-console.log(props.isAuthenticated)
   return (
     <Switch>
       <Route path="/" exact>
@@ -124,13 +119,10 @@ console.log(props.isAuthenticated)
   );
 };
 
-
-
 function mapDispatchToProps(dispatch) {
   return {
     autoLogin: () => dispatch(autoLogin()),
   };
 }
 
-export default 
-  connect(null, mapDispatchToProps)(useRoutes)
+export default connect(null, mapDispatchToProps)(useRoutes);
