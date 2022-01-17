@@ -2,5 +2,7 @@
     "port": 5000,
     "jwtSECRET": "andrei mern",
     "mongoURI": "mongodb+srv://Andrei:ramsik13@cluster0.lugxn.mongodb.net/MyAudio?retryWrites=true&w=majority"
+
+
 }
 

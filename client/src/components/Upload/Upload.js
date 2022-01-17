@@ -71,7 +71,7 @@ const Upload = (props) => {
     setInputs(formControls);
     setValid(isFormValid);
   };
-console.log(inputs)
+  console.log(inputs);
   const fileHandler = async () => {
     const formData = new FormData();
     formData.append("audio", inputs.audio.value);
@@ -84,11 +84,11 @@ console.log(inputs)
     for (let input of ref.current) {
       input.value = null;
     }
-  Object.keys(inputs).map(item => {
-    inputs[item].value = null
-    inputs[item].touched = false
-    inputs[item].valid = false
-  })
+    Object.keys(inputs).map((item) => {
+      inputs[item].value = null;
+      inputs[item].touched = false;
+      inputs[item].valid = false;
+    });
     setValid(!isValid);
   };
 

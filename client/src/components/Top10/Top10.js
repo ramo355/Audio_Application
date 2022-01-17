@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import classes from "./Top10.module.css";
 import { NavLink } from "react-router-dom";
 import Button from "../../components/UI/Buton/Button";
-import axios from "axios";
 import Icon from "../UI/Icon/Icon";
 import Loader from "../UI/Loader/Loader";
+import axios from "axios";
 
 const Top10 = (props) => {
   const [audio, setAudio] = useState();
@@ -77,8 +77,8 @@ const Top10 = (props) => {
     console.log(e.target);
     if (e.target === element) {
       setPlay(false);
-      if(play) {
-        setPlay(play)
+      if (play) {
+        setPlay(play);
       }
     } else {
       setPlay(true);
